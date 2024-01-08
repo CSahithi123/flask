@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href='{{url_for("index")}}'>Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    
+      <li class="nav-item active">
+        <a class="nav-link" href='{{url_for("home_villa")}}'>Villa Data</a>
+      </li>
+      &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+      &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+      &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+      &emsp; &emsp; &emsp; 
+      <li class="nav-item active">
+        <a class="nav-link" href='{{url_for("login")}}'>Login</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href='{{url_for("register")}}'>Register</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+
+{% extends 'layout.html' %}
+{% block body %}
+
+
+<br></br>
+
+<h3 class='text-center text-muted mb-3'>Flask CRUD Application</h3>
+<p class='text-right'><a href='{{url_for("add_villa")}}' class='btn btn-primary '>+Create New Villa</a></p>
+<table class='table table-bordered'>
+  <thead>
+    <th>SNo</th>
+    <th>Villa Name</th>
+    
+    <th>Price</th>
+    <th>Sqft</th>
+    <th>Occupancy</th>
+    <th>Contact</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    {% for row in datas %}
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{row.UNAME}}</td>
+        
+        <td>{{row.PRICE}}</td>
+        <td>{{row.SQFT}}</td>
+        <td>{{row.OCCUPANCY}}</td>
+        <td>{{row.CONTACT}}</td>
+        
+        <td><a href='{{url_for("edit_villa",uid=row.UID)}}' class='btn btn-success'>Edit</a></td>
+        <td><a href='{{url_for("delete_villa",uid=row.UID)}}' class='btn btn-danger' onclick='return confirm("Are You Sure")'>Delete</a></td>
+      </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{% endblock %}
